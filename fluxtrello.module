@@ -1,0 +1,47 @@
+<?php
+//use Drupal\fluxmite\MiteQueuedTasks;
+/**
+ * @file
+ * Main module file.
+ */
+
+/**
+ * Implements hook_rules_category_info().
+ */
+function fluxtrello_rules_category_info() {
+	$info =  array();
+  // Use the same icon as for the service plugin.
+	$info['fluxtrello'] = array(
+		'label' => t('Trello')
+	);
+	return $info;
+}
+
+/**
+ * Implements hook_fluxservice_plugin_directory().
+ */
+function fluxtrello_fluxservice_plugin_directory() {
+	return 'lib/Drupal/fluxtrello/Plugin';
+}
+
+
+/**
+ * 
+ */
+function fluxtrello_task_type_get_options(){
+	return TrelloQueuedTasks::getOptions();
+}
+
+/**
+ * 
+ */
+function fluxtrello_task_priority_get_options(){
+	return array(0,1,2,3,5);
+}
+
+/**
+ * 
+ */
+function fluxtrello_change_type_get_options(){
+	return array('create'=>'create','delete'=>'delete','update'=>'update');
+}
