@@ -24,12 +24,6 @@ class TrelloTaskHandlerBase extends RepetitiveTaskHandlerBase {
     $type=$type_split[1];
     $remote_type=$type;
 
-    //workaround for time_entries
-    if($type=='time'){
-      $type.='_'.$type_split[2];
-      $remote_type.='-'.$type_split[2];
-    }
-
     $this->task['entity_type']=$type;
     $this->task['remote_type']=$remote_type;
   }

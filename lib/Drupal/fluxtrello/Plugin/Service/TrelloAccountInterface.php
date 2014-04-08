@@ -15,18 +15,10 @@ use Drupal\fluxservice\Service\OAuthAccountInterface;
 interface TrelloAccountInterface extends OAuthAccountInterface {
 
   /**
-   * Gets the account's access token.
-   *
-   * @return string
-   *   The access token of the account.
-   */
-  public function getAccessToken();
-
-  /**
-   * Gets the Trello Graph API client.
+   * Gets the Trello API client.
    *
    * @return \Guzzle\Service\Client
-   *   The web service client for the Graph API.
+   *   The web service client for the API.
    */
   public function client();
 

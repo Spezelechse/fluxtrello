@@ -8,7 +8,7 @@
 namespace Drupal\fluxtrello\Plugin\Rules\Event;
 
 /**
- * Event handler for accounts.
+ * Event handler for boards.
  */
 class TrelloBoardEventHandler extends TrelloEventHandlerBase {
 
@@ -17,8 +17,8 @@ class TrelloBoardEventHandler extends TrelloEventHandlerBase {
    */
   public static function getInfo() {
     return static::getInfoDefaults() + array(
-      'name' => 'fluxtrello_account_event',
-      'label' => t('Something happend to this board'),
+      'name' => 'fluxtrello_board_event',
+      'label' => t('Something happend to a board'),
       'variables' => array(
         'account' => static::getServiceVariableInfo(),
         'trello_board' => array(
@@ -28,7 +28,7 @@ class TrelloBoardEventHandler extends TrelloEventHandlerBase {
         ),
         'change_type' => array(
           'type' => 'text',
-          'options list' => 'change_type_get_options',
+          'options board' => 'change_type_get_options',
           'label' => t('Change type'),
           'restiction' => 'input',
         ),
@@ -53,8 +53,8 @@ class TrelloBoardEventHandler extends TrelloEventHandlerBase {
    */
   public function summary() {
     $settings = $this->getSettings();
-    if ($settings['account'] && $account = entity_load_single('fluxservice_account', $settings['account'])) {
-      return $this->eventInfo['label'] . ' ' . t('of %account', array('%account' => "@{$account->label()}"));
+    if ($settings['board'] && $board = entity_load_single('fluxservice_board', $settings['board'])) {
+      return $this->eventInfo['label'] . ' ' . t('of %board', array('%board' => "@{$board->label()}"));
     }
     return $this->eventInfo['label'];
   }

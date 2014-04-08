@@ -7,12 +7,12 @@
 
 namespace Drupal\fluxtrello\Plugin\Service;
 
-use Drupal\fluxservice\Plugin\Entity\Service;
+use Drupal\fluxservice\Service\OAuthServiceBase;
 
 /**
  * Service plugin implementation for Trello.
  */
-class TrelloService extends Service implements TrelloServiceInterface {
+class TrelloService extends OAuthServiceBase implements TrelloServiceInterface {
 
   /**
    * Defines the plugin.
@@ -34,7 +34,6 @@ class TrelloService extends Service implements TrelloServiceInterface {
   public function getDefaultSettings() {
     return parent::getDefaultSettings() + array(
       'polling_interval' => 900,
-      'subdomain' => '',
     );
   }
 
@@ -46,25 +45,10 @@ class TrelloService extends Service implements TrelloServiceInterface {
 
     $form['help'] = array(
       '#type' => 'markup',
-      '#markup' => t('In the following, you need to provide communicating details for Trello.<br/>For that, the correct subdomain (<b>demo</b>.trello.yo.lk) is needed '),
+      '#markup' => t(''),
       '#prefix' => '<p class="fluxservice-help">',
       '#suffix' => '</p>',
       '#weight' => -1,
-    );
-
-    $form['auth'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Communication'),
-      '#description' => t('Settings for communicating with trello.'),
-      // Avoid the data being nested below 'rules' or falling out of 'data'.
-      '#parents' => array('data'),
-    );
-
-    $form['auth']['subdomain'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Subdomain'),
-      '#default_value' => $this->getSubdomain(),
-      '#description' => t('The Subdomain used by this trello service.'),
     );
 
     $form['rules'] = array(
@@ -84,36 +68,6 @@ class TrelloService extends Service implements TrelloServiceInterface {
     );
 
     return $form;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getConsumerKey() {
-    return $this->data->get('api_key');
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setConsumerKey($key){
-    $this->data->set('api_key', $key);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-
-  public function getSubdomain(){
-    return $this->data->get('subdomain');
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getConsumerSecret() {
-    return $this->data->get('api_key');
   }
 
   /**

@@ -5,12 +5,12 @@
  * Contains TrelloEntityBase.
  */
 
-namespace Drupal\fluxmite\Plugin\Entity;
+namespace Drupal\fluxtrello\Plugin\Entity;
 
 use Drupal\fluxservice\Entity\RemoteEntity;
 
 /**
- * Entity class for Trello Customers.
+ * Entity base class.
  */
 class TrelloEntityBase extends RemoteEntity implements TrelloEntityBaseInterface {
 	public function __construct(array $values = array(), $entity_type = NULL) {
