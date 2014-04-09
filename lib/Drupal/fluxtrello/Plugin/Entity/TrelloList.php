@@ -25,7 +25,7 @@ class TrelloList extends TrelloEntityBase implements TrelloListInterface {
    */
   public static function getInfo() {
     return array(
-      'name' => 'fluxtrello_',
+      'name' => 'fluxtrello_list',
       'label' => t('Trello (remote): List'),
       'module' => 'fluxtrello',
       'service' => 'fluxtrello',

@@ -31,6 +31,14 @@ class TrelloAccount extends OAuthAccountBase implements TrelloAccountInterface {
     );
   }
 
+    /**
+   * {@inheritdoc}
+   */
+  public function getDefaultSettings() {
+    return parent::getDefaultSettings() + array(
+      'username' => '',
+    );
+  }
 
   /**
    * The service base url.
@@ -71,6 +79,22 @@ class TrelloAccount extends OAuthAccountBase implements TrelloAccountInterface {
     return $properties;
   }
 
+   /**
+   * {@inheritdoc}
+   */
+  public function settingsForm(array &$form_state) {
+    $form=parent::settingsForm($form_state);
+
+    $form['username'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Username'),
+      '#default_value' => $this->getUsername(),
+      '#description' => t('The username of this account'),
+    );
+
+    return $form;
+  }
+
   /**
     * 
     */
@@ -83,6 +107,10 @@ class TrelloAccount extends OAuthAccountBase implements TrelloAccountInterface {
       'token' => $this->getOauthToken(),
       'token_secret' => $this->getOauthTokenSecret(),
     ));
+  }
+
+  protected function getUsername(){
+    return $this->data->get('username');
   }
 
   /**

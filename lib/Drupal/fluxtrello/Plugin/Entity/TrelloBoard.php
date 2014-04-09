@@ -25,7 +25,7 @@ class TrelloBoard extends TrelloEntityBase implements TrelloBoardInterface {
    */
   public static function getInfo() {
     return array(
-      'name' => 'fluxtrello_',
+      'name' => 'fluxtrello_board',
       'label' => t('Trello (remote): Board'),
       'module' => 'fluxtrello',
       'service' => 'fluxtrello',

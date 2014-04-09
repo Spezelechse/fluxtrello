@@ -25,7 +25,7 @@ class TrelloCard extends TrelloEntityBase implements TrelloCardInterface {
    */
   public static function getInfo() {
     return array(
-      'name' => 'fluxtrello_',
+      'name' => 'fluxtrello_card',
       'label' => t('Trello (remote): Card'),
       'module' => 'fluxtrello',
       'service' => 'fluxtrello',
@@ -54,7 +54,7 @@ class TrelloCard extends TrelloEntityBase implements TrelloCardInterface {
       'type' => 'text',
       'setter callback' => 'entity_property_verbatim_set',
     );
-    $info['badges'] = array(
+    /*$info['badges'] = array(
       'label' => t('Badges'),
       'description' => t("Badges."),
       'type' => 'struct',
@@ -266,7 +266,7 @@ class TrelloCard extends TrelloEntityBase implements TrelloCardInterface {
       'description' => t("Url."),
       'type' => 'text',
       'setter callback' => 'entity_property_verbatim_set',
-    );
+    );*/
     return $info;
   }
 }
