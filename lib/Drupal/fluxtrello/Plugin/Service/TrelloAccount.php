@@ -106,6 +106,7 @@ class TrelloAccount extends OAuthAccountBase implements TrelloAccountInterface {
       'consumer_secret' => $service->getConsumerSecret(),
       'token' => $this->getOauthToken(),
       'token_secret' => $this->getOauthTokenSecret(),
+      'username' => $this->getUsername(),
     ));
   }
 

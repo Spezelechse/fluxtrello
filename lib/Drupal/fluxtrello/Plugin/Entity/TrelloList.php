@@ -76,7 +76,13 @@ class TrelloList extends TrelloEntityBase implements TrelloListInterface {
     $info['pos'] = array(
       'label' => t('List position'),
       'description' => t("List position."),
-      'type' => 'integer',
+      'type' => 'text',
+      'setter callback' => 'entity_property_verbatim_set',
+    );
+    $info['subscribed'] = array(
+      'label' => t('Subscribed'),
+      'description' => t("Subscribed."),
+      'type' => 'boolean',
       'setter callback' => 'entity_property_verbatim_set',
     );
     return $info;

@@ -26,7 +26,13 @@ class TrelloCardController extends TrelloControllerBase {
     
     try{
 	    foreach ($ids as $id) {
-        //TODO: getCard
+        if($response=$client->getCard(array(  'remote_id'=>$id,
+                                              'key'=>$client->getConfig('consumer_key'),
+                                              'token'=>$client->getConfig('token'),
+                                              'fields'=>'all')))
+        {
+          $output[$id]=$response;
+        }
 	  	}
   	}
   	catch(BadResponseException $e){
@@ -34,6 +40,7 @@ class TrelloCardController extends TrelloControllerBase {
          $this->handle404('[404] Host "'.$client->getBaseUrl().'" not found (getCard)');
        }
        else{
+          watchdog('fluxtrello @ getCard', $e->getResponse()->getMessage());
        }
     }
 

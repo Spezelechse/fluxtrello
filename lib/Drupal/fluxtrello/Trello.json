@@ -3,1168 +3,1172 @@
   "apiVersion": "1.0",
   "description": "Mite API",
   "operations": {
-  	"GetBoards": {
-		"httpMethod": "GET",
-      	"uri": "members/{username}/boards",
-      	"summary": "Lists all boards available for this user.",
-      	"parameters": {
-      		"username": {
-      			"location": "uri",
-      			"type": "string",
-            	"required": true,
-      			"description": "name of the used user",
-      		},
-	        "key": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"api key for app authorization",
-	        },
-	        "token": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"token for user authorization",
-	        },
-	        "filter": {
-	        	"location": "query",
-	            "type": "string",
-	            "description": "",
-	        },
-	        "actions": {
-	        	"location":"query",
-	        	"type":"string",
-	        	"description":"",
-	        },
-	        "actions_entities": {
-	        	"location":"query",
-	        	"type":"boolean",
-	        	"description":"",
-	        },
-	        "actions_limit": {
-	        	"location":"query",
-	        	"type":"integer",
-	        	"description":"",
-	        },
-	        "actions_format": {
-	        	"location":"query",
-	        	"type":"string",
-	        	"description":"",
-	        },
-	        "actions_since": {
-	        	"location":"query",
-	        	"type":"string",
-	        	"description":"",
-	        },
-	        "action_fields": {
-	        	"location":"query",
-	        	"type":"string",
-	        	"description":"",
-	        },
-	        "memberships": {
-	        	"location":"query",
-	        	"type":"string",
-	        	"description":"",
-	        },
-	        "organization": {
-	        	"location":"query",
-	        	"type":"boolean",
-	        	"description":"",
-	        },
-	        "organization_fields": {
-	        	"location":"query",
-	        	"type":"string",
-	        	"description":"",
-	        },
-	        "lists": {
-	        	"location":"query",
-	        	"type":"string",
-	        	"description":"",
-	        }
-      	}
-      },
-      "GetBoard": {
-		"httpMethod": "GET",
-      	"uri": "boards/{board_id}",
-      	"summary": "Returns the board with the given id",
-      	"parameters": {
-      		"board_id": {
-      			"location": "uri",
-      			"type": "string",
-           		"required": true,
-      			"description": "",
-      		},
-	        "key": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"api key for app authorization",
-	        },
-	        "token": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"token for user authorization",
-	        },
-      		"actions": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"actions_entities": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"actions_format": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"actions_since": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"actions_limit": {
-      			"location": "query",
-      			"type": "integer",
-      			"description": "",
-      		},
-      		"action_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"action_member": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"action_member_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"action_memberCreator": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"action_memberCreator_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"cards": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"card_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"card_attachments": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"card_attachment_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"card_checklists": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"card_stickers": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"boardStars": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"lists": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"list_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"memberships": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"memberships_member": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"memberships_member_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"members": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"member_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"membersInvited": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"membersInvited_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"checklists": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"checklists_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"organization": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"organization_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"organization_memberships": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"myPrefs": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		}
-      	}
-      },
-      "GetCards": {
-		"httpMethod": "GET",
-      	"uri": "boards/{board_id}/cards",
-      	"summary": "Lists all cards available for this board.",
-      	"parameters": {
-      		"board_id": {
-      			"location": "uri",
-      			"type": "string",
-            	"required": true,
-      			"description": "",
-      		},
-	        "key": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"api key for app authorization",
-	        },
-	        "token": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"token for user authorization",
-	        },
-      		"actions": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"attachments": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"attachment_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"stickers": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"members": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"member_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"checkItemStates": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"checklists": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"limit": {
-      			"location": "query",
-      			"type": "integer",
-      			"description": "",
-      		},
-      		"since": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"before": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"filter": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      	}
-      },
-      "GetCard": {
-		"httpMethod": "GET",
-      	"uri": "cards/{card_id}",
-      	"summary": "Returns the card with the given id",
-      	"parameters": {
-      		"card_id": {
-      			"location": "uri",
-      			"type": "string",
-           		"required": true,
-      			"description": "",
-      		},
-	        "key": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"api key for app authorization",
-	        },
-	        "token": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"token for user authorization",
-	        },
-      		"actions": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"actions_entities": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"actions_limit": {
-      			"location": "query",
-      			"type": "integer",
-      			"description": "",
-      		},
-      		"action_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"action_memberCreator_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"attachments": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"attachment_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"members": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"member_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"membersVoted": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"memberVoted_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"checkItemStates": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"checkItemState_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"checklists": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"checklists_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"board": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"board_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"list": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"list_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"stickers": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"sticker_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		}
-      	}
-      },
-      "GetLists": {
-		"httpMethod": "GET",
-      	"uri": "boards/{board_id}/lists",
-      	"summary": "Lists all lists available for this board.",
-      	"parameters": {
-      		"board_id": {
-      			"location": "uri",
-      			"type": "string",
-           		"required": true,
-      			"description": "",
-      		},
-	        "key": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"api key for app authorization",
-	        },
-	        "token": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"token for user authorization",
-	        },
-      		"cards": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"card_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"filter": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		}
-      	}
-      },
-      "GetList": {
-		"httpMethod": "GET",
-      	"uri": "lists/{list_id}",
-      	"summary": "Returns the list with the given id",
-      	"parameters": {
-      		"board_id": {
-      			"location": "uri",
-      			"type": "string",
-           		"required": true,
-      			"description": "",
-      		},
-	        "key": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"api key for app authorization",
-	        },
-	        "token": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"token for user authorization",
-	        },
-      		"cards": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"card_fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"fields": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		}
-      	}
-      },
-      "PostBoard": {
-		"httpMethod": "POST",
-      	"uri": "boards",
-      	"summary": "Create new board",
-      	"parameters": {
-	        "key": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"api key for app authorization",
-	        },
-	        "token": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"token for user authorization",
-	        },
-      		"name": {
-      			"location": "query",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      		"desc": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"idOrganization": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"idBoardSource": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"keepFromSource": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"powerUps": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"prefs_permissionLevel": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"prefs_voting": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"prefs_comments": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"prefs_invitations": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"prefs_selfJoin": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"prefs_cardCovers": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"prefs_background": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"prefs_cardAging": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		}
-      	}
-      },
-      "PostCard": {
-		"httpMethod": "POST",
-      	"uri": "cards",
-      	"summary": "Create new card",
-      	"parameters": {
-	        "key": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"api key for app authorization",
-	        },
-	        "token": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"token for user authorization",
-	        },
-      		"name": {
-      			"location": "query",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      		"desc": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"pos": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"due": {
-      			"location": "query",
-      			"type": "date",
-      			"description": "",
-      		},
-      		"labels": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"idList": {
-      			"location": "query",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      		"idMembers": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"idCardSource": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"keepFromSource": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		}
-      	}
-      },
-      "PostComment": {
-		"httpMethod": "POST",
-      	"uri": "cards/{card_id}/actions/comments",
-      	"summary": "Create a new comment at the card with the given id",
-      	"parameters": {
-      		"key": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"api key for app authorization",
-	        },
-	        "token": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"token for user authorization",
-	        },
-      		"text": {
-      			"location": "query",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      	}
-      },
-      "PostList": {
-		"httpMethod": "POST",
-      	"uri": "list",
-      	"summary": "Create a new list",
-      	"parameters": {
-      		"key": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"api key for app authorization",
-	        },
-	        "token": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"token for user authorization",
-	        },
-      		"name": {
-      			"location": "query",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      		"idBoard": {
-      			"location": "query",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      		"idListSource": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"pos": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		}
-      	}
-      },
-      "PutBoard": {
-		"httpMethod": "PUT",
-      	"uri": "boards/{board_id}",
-      	"summary": "Update an existing board",
-      	"parameters": {
-      		"board_id": {
-      			"location": "uri",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      		"key": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"api key for app authorization",
-	        },
-	        "token": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"token for user authorization",
-	        },
-      		"name": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"desc": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"closed": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"subscribed": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"idOrganization": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"prefs/permissionLevel": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"prefs/selfJoin": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"prefs/cardCovers": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"prefs/invitations": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"prefs/voting": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"prefs/comments": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"prefs/background": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"prefs/cardAging": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"prefs/calendarFeedEnabled": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"labelNames/green": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"labelNames/yellow": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"labelNames/orange": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"labelNames/red": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"labelNames/purple": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"labelNames/blue": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		}
-      	}
-      },
-      "PutCard": {
-		"httpMethod": "PUT",
-      	"uri": "cards/{card_id}",
-      	"summary": "Update an existing card",
-      	"parameters": {
-      		"card_id": {
-      			"location": "uri",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      		"key": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"api key for app authorization",
-	        },
-	        "token": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"token for user authorization",
-	        },
-      		"name": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"desc": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"closed": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"labels": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"idMembers": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"idAttachmentCover": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"idList": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"idBoard": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"pos": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"due": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"subscribed": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		}
-      	}
-      },
-      "PutComment": {
-		"httpMethod": "PUT",
-      	"uri": "cards/{card_id}/actions/{action_id}/comments",
-      	"summary": "Update an existing comment",
-      	"parameters": {
-      		"card_id": {
-      			"location": "uri",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      		"action_id": {
-      			"location": "uri",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      		"key": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"api key for app authorization",
-	        },
-	        "token": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"token for user authorization",
-	        },
-      		"text": {
-      			"location": "query",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      		"idAction": {
-      			"location": "uri",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      	}
-      },
-      "PutList": {
-		"httpMethod": "PUT",
-      	"uri": "lists/{list_id}",
-      	"summary": "Update an existing list",
-      	"parameters": {
-      		"list_id": {
-      			"location": "uri",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      		"key": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"api key for app authorization",
-	        },
-	        "token": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"token for user authorization",
-	        },
-      		"name": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"closed": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		},
-      		"idBoard": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"pos": {
-      			"location": "query",
-      			"type": "string",
-      			"description": "",
-      		},
-      		"subscribed": {
-      			"location": "query",
-      			"type": "boolean",
-      			"description": "",
-      		}
-      	}
-      },
-      "DeleteCard": {
-		"httpMethod": "DELETE",
-      	"uri": "cards/{card_id",
-      	"summary": "Delete a card",
-      	"parameters": {
-      		"card_id": {
-      			"location": "uri",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      		"key": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"api key for app authorization",
-	        },
-	        "token": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"token for user authorization",
-	        }
-      	}
-      },
-      "DeleteComment": {
-		"httpMethod": "DELETE",
-      	"uri": "cards/{card_id}/actions/{action_id}/comments",
-      	"summary": "Delete a comment",
-      	"parameters": {
-      		"card_id": {
-      			"location": "uri",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      		"action_id": {
-      			"location": "uri",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      		"key": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"api key for app authorization",
-	        },
-	        "token": {
-	        	"location":"query",
-	        	"type":"string",
-            	"required": true,
-	        	"description":"token for user authorization",
-	        },
-	        "idAction": {
-      			"location": "query",
-      			"type": "string",
-      			"required": true,
-      			"description": "",
-      		},
-      	}
-      },
-  	},
-  "models": {}
+    "GetMemberBoards": {
+      "httpMethod": "GET",
+      "uri": "members/{username}/boards",
+      "summary": "Lists all boards available for this user.",
+      "parameters": {
+        "username": {
+          "location": "uri",
+          "type": "string",
+          "required": true,
+          "description": "name of the used user"
+        },
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        },
+        "filter": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "actions": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "actions_entities": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "actions_limit": {
+          "location": "query",
+          "type": "integer",
+          "description": ""
+        },
+        "actions_format": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "actions_since": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "action_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "memberships": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "organization": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "organization_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "lists": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "GetBoard": {
+      "httpMethod": "GET",
+      "uri": "boards/{remote_id}",
+      "summary": "Returns the board with the given id",
+      "parameters": {
+        "remote_id": {
+          "location": "uri",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        },
+        "actions": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "actions_entities": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "actions_format": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "actions_since": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "actions_limit": {
+          "location": "query",
+          "type": "integer",
+          "description": ""
+        },
+        "action_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "action_member": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "action_member_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "action_memberCreator": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "action_memberCreator_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "cards": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "card_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "card_attachments": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "card_attachment_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "card_checklists": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "card_stickers": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "boardStars": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "lists": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "list_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "memberships": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "memberships_member": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "memberships_member_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "members": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "member_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "membersInvited": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "membersInvited_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "checklists": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "checklists_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "organization": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "organization_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "organization_memberships": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "myPrefs": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "GetBoardCards": {
+      "httpMethod": "GET",
+      "uri": "boards/{remote_id}/cards",
+      "summary": "Lists all cards available for this board.",
+      "parameters": {
+        "remote_id": {
+          "location": "uri",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        },
+        "actions": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "attachments": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "attachment_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "stickers": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "members": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "member_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "checkItemStates": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "checklists": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "limit": {
+          "location": "query",
+          "type": "integer",
+          "description": ""
+        },
+        "since": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "before": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "filter": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "GetCard": {
+      "httpMethod": "GET",
+      "uri": "cards/{remote_id}",
+      "summary": "Returns the card with the given id",
+      "parameters": {
+        "remote_id": {
+          "location": "uri",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        },
+        "actions": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "actions_entities": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "actions_limit": {
+          "location": "query",
+          "type": "integer",
+          "description": ""
+        },
+        "action_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "action_memberCreator_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "attachments": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "attachment_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "members": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "member_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "membersVoted": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "memberVoted_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "checkItemStates": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "checkItemState_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "checklists": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "checklists_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "board": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "board_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "list": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "list_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "stickers": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "sticker_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "GetBoardLists": {
+      "httpMethod": "GET",
+      "uri": "boards/{remote_id}/lists",
+      "summary": "Lists all lists available for this board.",
+      "parameters": {
+        "remote_id": {
+          "location": "uri",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        },
+        "cards": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "card_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "filter": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "GetList": {
+      "httpMethod": "GET",
+      "uri": "lists/{remote_id}",
+      "summary": "Returns the list with the given id",
+      "parameters": {
+        "remote_id": {
+          "location": "uri",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        },
+        "cards": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "card_fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "fields": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "PostBoard": {
+      "httpMethod": "POST",
+      "uri": "boards",
+      "summary": "Create new board",
+      "parameters": {
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        },
+        "name": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "desc": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "idOrganization": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "idBoardSource": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "keepFromSource": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "powerUps": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs_permissionLevel": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs_voting": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs_comments": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs_invitations": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs_selfJoin": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs_cardCovers": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs_background": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs_cardAging": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "PostCard": {
+      "httpMethod": "POST",
+      "uri": "cards",
+      "summary": "Create new card",
+      "parameters": {
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        },
+        "name": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "desc": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "pos": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "due": {
+          "location": "query",
+          "type": "date",
+          "description": ""
+        },
+        "labels": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "idList": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "idMembers": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "idCardSource": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "keepFromSource": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "PostCardComment": {
+      "httpMethod": "POST",
+      "uri": "cards/{remote_id}/actions/comments",
+      "summary": "Create a new comment at the card with the given id",
+      "parameters": {
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        },
+        "text": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      }
+    },
+    "PostList": {
+      "httpMethod": "POST",
+      "uri": "list",
+      "summary": "Create a new list",
+      "parameters": {
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        },
+        "name": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "idBoard": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "idListSource": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "pos": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "PutBoard": {
+      "httpMethod": "PUT",
+      "uri": "boards/{remote_id}",
+      "summary": "Update an existing board",
+      "parameters": {
+        "remote_id": {
+          "location": "uri",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        },
+        "name": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "desc": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "closed": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "subscribed": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "idOrganization": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs/permissionLevel": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs/selfJoin": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs/cardCovers": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs/invitations": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs/voting": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs/comments": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs/background": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs/cardAging": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "prefs/calendarFeedEnabled": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "labelNames/green": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "labelNames/yellow": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "labelNames/orange": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "labelNames/red": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "labelNames/purple": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "labelNames/blue": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "PutCard": {
+      "httpMethod": "PUT",
+      "uri": "cards/{remote_id}",
+      "summary": "Update an existing card",
+      "parameters": {
+        "remote_id": {
+          "location": "uri",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        },
+        "name": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "desc": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "closed": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "labels": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "idMembers": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "idAttachmentCover": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "idList": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "idBoard": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "pos": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "due": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "subscribed": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "PutCardComment": {
+      "httpMethod": "PUT",
+      "uri": "cards/{remote_id}/actions/{action_id}/comments",
+      "summary": "Update an existing comment",
+      "parameters": {
+        "remote_id": {
+          "location": "uri",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "action_id": {
+          "location": "uri",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        },
+        "text": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "idAction": {
+          "location": "uri",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      }
+    },
+    "PutList": {
+      "httpMethod": "PUT",
+      "uri": "lists/{remote_id}",
+      "summary": "Update an existing list",
+      "parameters": {
+        "remote_id": {
+          "location": "uri",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        },
+        "name": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "closed": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "idBoard": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "pos": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        },
+        "subscribed": {
+          "location": "query",
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "DeleteCard": {
+      "httpMethod": "DELETE",
+      "uri": "cards/{remote_id}",
+      "summary": "Delete a card",
+      "parameters": {
+        "remote_id": {
+          "location": "uri",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        }
+      }
+    },
+    "DeleteCardComment": {
+      "httpMethod": "DELETE",
+      "uri": "cards/{remote_id}/actions/{action_id}/comments",
+      "summary": "Delete a comment",
+      "parameters": {
+        "remote_id": {
+          "location": "uri",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "action_id": {
+          "location": "uri",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        },
+        "idAction": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      }
+    }
+  }
 }

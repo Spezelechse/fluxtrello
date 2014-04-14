@@ -26,7 +26,13 @@ class TrelloListController extends TrelloControllerBase {
     
     try{
 	    foreach ($ids as $id) {
-        //TODO: getList
+        if($response=$client->getList(array(  'remote_id'=>$id,
+                                              'key'=>$client->getConfig('consumer_key'),
+                                              'token'=>$client->getConfig('token'),
+                                              'fields'=>'all')))
+        {
+          $output[$id]=$response;
+        }
 	  	}
   	}
   	catch(BadResponseException $e){
@@ -34,6 +40,7 @@ class TrelloListController extends TrelloControllerBase {
          $this->handle404('[404] Host "'.$client->getBaseUrl().'" not found (getList)');
        }
        else{
+          watchdog('fluxtrello @ getList', $e->getResponse()->getMessage());
        }
     }
 

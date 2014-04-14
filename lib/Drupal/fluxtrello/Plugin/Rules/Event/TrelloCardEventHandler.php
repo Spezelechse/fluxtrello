@@ -28,7 +28,7 @@ class TrelloCardEventHandler extends TrelloEventHandlerBase {
         ),
         'change_type' => array(
           'type' => 'text',
-          'options card' => 'change_type_get_options',
+          'options list' => 'fluxtrello_change_type_get_options',
           'label' => t('Change type'),
           'restiction' => 'input',
         ),
@@ -53,8 +53,8 @@ class TrelloCardEventHandler extends TrelloEventHandlerBase {
    */
   public function summary() {
     $settings = $this->getSettings();
-    if ($settings['card'] && $card = entity_load_single('fluxservice_card', $settings['card'])) {
-      return $this->eventInfo['label'] . ' ' . t('of %card', array('%card' => "@{$card->label()}"));
+    if ($settings['account'] && $account = entity_load_single('fluxservice_account', $settings['account'])) {
+      return $this->eventInfo['label'] . ' ' . t('of %account', array('%account' => "@{$account->label()}"));
     }
     return $this->eventInfo['label'];
   }

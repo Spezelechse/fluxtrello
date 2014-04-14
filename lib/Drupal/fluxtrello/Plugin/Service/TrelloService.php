@@ -34,6 +34,7 @@ class TrelloService extends OAuthServiceBase implements TrelloServiceInterface {
   public function getDefaultSettings() {
     return parent::getDefaultSettings() + array(
       'polling_interval' => 900,
+      'use_remote_dependencies'=> 1,
     );
   }
 
@@ -57,6 +58,14 @@ class TrelloService extends OAuthServiceBase implements TrelloServiceInterface {
       '#description' => t('Settings for detecting Trello related events as configured via <a href="@url">Rules</a>.', array('@url' => url('http://drupal.org/project/rules'))),
       // Avoid the data being nested below 'rules' or falling out of 'data'.
       '#parents' => array('data'),
+    );
+
+    $form['rules']['use_remote_dependencies'] = array(
+      '#type' => 'select',
+      '#title' => t('Use remote entity dependencies'),
+      '#default_value' => $this->remoteDependenciesAreUsed(),
+      '#options' => array(0 => t('no'), 1=>t('yes')),
+      '#description' => t('Some remote entities depend on others. If dependencies are used the taskhandler will not run until the needed entities are handled.'),
     );
 
     $form['rules']['polling_interval'] = array(
@@ -85,4 +94,10 @@ class TrelloService extends OAuthServiceBase implements TrelloServiceInterface {
     return $this;
   }
 
+  /**
+   * 
+   */
+  public function remoteDependenciesAreUsed(){
+    return $this->data->get('use_remote_dependencies');
+  }
 }

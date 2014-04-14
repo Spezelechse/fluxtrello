@@ -4,7 +4,7 @@
  */
 namespace Drupal\fluxtrello;
 
-class TelloQueuedTasks{
+class TrelloQueuedTasks{
 	public function getOptions(){
 		return array(	
 				//callback => label

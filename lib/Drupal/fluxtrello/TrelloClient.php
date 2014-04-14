@@ -22,7 +22,7 @@ class TrelloClient extends Client {
    * {@inheritdoc}
    */
   public static function factory($config = array()) {
-    $required = array('base_url', 'consumer_key', 'consumer_secret', 'token', 'token_secret');
+    $required = array('base_url', 'consumer_key', 'consumer_secret', 'token', 'token_secret','username');
     
     $config = Collection::fromConfig($config, array(), $required);
     $client = new static($config->get('base_url'), $config);

@@ -42,6 +42,8 @@ class TrelloCard extends TrelloEntityBase implements TrelloCardInterface {
    * Gets the entity property definitions.
    */
   public static function getEntityPropertyInfo($entity_type, $entity_info) {
+    $info=parent::getEntityPropertyInfo($entity_type,$entity_info);
+
     $info['id'] = array(
       'label' => t('Id'),
       'description' => t("Card id."),
@@ -54,7 +56,7 @@ class TrelloCard extends TrelloEntityBase implements TrelloCardInterface {
       'type' => 'text',
       'setter callback' => 'entity_property_verbatim_set',
     );
-    /*$info['badges'] = array(
+    $info['badges'] = array(
       'label' => t('Badges'),
       'description' => t("Badges."),
       'type' => 'struct',
@@ -198,6 +200,12 @@ class TrelloCard extends TrelloEntityBase implements TrelloCardInterface {
       'type' => 'text',
       'setter callback' => 'entity_property_verbatim_set',
     );
+    $info['idMembersVoted'] = array(
+      'label' => t('Id members voted'),
+      'description' => t("Id members voted."),
+      'type' => 'list<text>',
+      'setter callback' => 'entity_property_verbatim_set',
+    );
     $info['idMembers'] = array(
       'label' => t('Id members'),
       'description' => t("Id members."),
@@ -255,10 +263,22 @@ class TrelloCard extends TrelloEntityBase implements TrelloCardInterface {
       'type' => 'integer',
       'setter callback' => 'entity_property_verbatim_set',
     );
+    $info['shortLink'] = array(
+      'label' => t('Short link'),
+      'description' => t("Short link."),
+      'type' => 'text',
+      'setter callback' => 'entity_property_verbatim_set',
+    );
     $info['shortUrl'] = array(
       'label' => t('Short url'),
       'description' => t("Short url."),
       'type' => 'text',
+      'setter callback' => 'entity_property_verbatim_set',
+    );
+    $info['subscribed'] = array(
+      'label' => t('Subscribed'),
+      'description' => t('Subscribed'),
+      'type' => 'boolean',
       'setter callback' => 'entity_property_verbatim_set',
     );
     $info['url'] = array(
@@ -266,7 +286,7 @@ class TrelloCard extends TrelloEntityBase implements TrelloCardInterface {
       'description' => t("Url."),
       'type' => 'text',
       'setter callback' => 'entity_property_verbatim_set',
-    );*/
+    );
     return $info;
   }
 }

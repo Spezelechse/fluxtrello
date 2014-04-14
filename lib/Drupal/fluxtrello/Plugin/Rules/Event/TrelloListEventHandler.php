@@ -28,7 +28,7 @@ class TrelloListEventHandler extends TrelloEventHandlerBase {
         ),
         'change_type' => array(
           'type' => 'text',
-          'options list' => 'change_type_get_options',
+          'options list' => 'fluxtrello_change_type_get_options',
           'label' => t('Change type'),
           'restiction' => 'input',
         ),
@@ -53,8 +53,8 @@ class TrelloListEventHandler extends TrelloEventHandlerBase {
    */
   public function summary() {
     $settings = $this->getSettings();
-    if ($settings['list'] && $list = entity_load_single('fluxservice_list', $settings['list'])) {
-      return $this->eventInfo['label'] . ' ' . t('of %list', array('%list' => "@{$list->label()}"));
+    if ($settings['account'] && $account = entity_load_single('fluxservice_account', $settings['account'])) {
+      return $this->eventInfo['label'] . ' ' . t('of %account', array('%account' => "@{$account->label()}"));
     }
     return $this->eventInfo['label'];
   }

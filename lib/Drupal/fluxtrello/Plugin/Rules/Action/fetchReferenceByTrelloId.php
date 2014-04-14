@@ -25,7 +25,7 @@ class fetchReferenceByTrelloId extends RulesPluginHandlerBase implements \RulesA
       'label' => t('Fetch reference by trello id'),
       'parameter' => array(
         'trello_id' => array(
-          'type' => 'integer',
+          'type' => 'text',
           'label' => t('Trello id'),
           'required' => TRUE,
         ),

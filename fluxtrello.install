@@ -16,6 +16,11 @@
           'type' => 'varchar',
           'length' => '60',
           ),
+        'isNode' => array(
+          'description' => 'True (1) if local "entity" is a node',
+          'type' => 'int',
+          'size' => 'tiny',
+          ),
         'trello_id' => array(
           'description' => 'Trello id',
           'type' => 'varchar',
@@ -38,7 +43,8 @@
           ),
         'checksum' => array(
           'description' => 'Checksum from the last update',
-          'type' => 'int',
+          'type' => 'varchar',
+          'length' => '255',
           ),
         ),
       'primary key' => array('id','type'),
@@ -62,6 +68,11 @@
           'type' => 'varchar',
           'length' => '50',
           'not null' => TRUE,
+          ),
+        'isNode' => array(
+          'description' => 'True (1) if local "entity" is a node',
+          'type' => 'int',
+          'size' => 'tiny',
           ),
         'request' => array(
           'description' => 'Request string used by the task',

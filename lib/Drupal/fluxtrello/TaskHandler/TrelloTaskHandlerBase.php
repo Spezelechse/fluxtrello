@@ -14,7 +14,7 @@ use Drupal\fluxtrello\TrelloTaskQueue;
 /**
  * Base class for Trello task handlers that dispatch Rules events.
  */
-class TrelloTaskHandlerBase extends RepetitiveTaskHandlerBase {
+abstract class TrelloTaskHandlerBase extends RepetitiveTaskHandlerBase {
 
   public function __construct(array $task) {
     parent::__construct($task);
@@ -22,10 +22,8 @@ class TrelloTaskHandlerBase extends RepetitiveTaskHandlerBase {
     //extract the entity type from the event type
     $type_split=explode("_",$this->task['identifier']);
     $type=$type_split[1];
-    $remote_type=$type;
 
     $this->task['entity_type']=$type;
-    $this->task['remote_type']=$remote_type;
   }
   /**
    * Gets the configured event name to dispatch.
@@ -39,13 +37,6 @@ class TrelloTaskHandlerBase extends RepetitiveTaskHandlerBase {
    */
   public function getEntityType(){
     return $this->task['entity_type'];
-  }
-
-  /**
-   * 
-   */
-  public function getRemoteType(){
-    return $this->task['remote_type'];
   }
 
   /**
@@ -80,6 +71,106 @@ class TrelloTaskHandlerBase extends RepetitiveTaskHandlerBase {
     catch(\RulesEvaluationException $e) {
       rules_log($e->msg, $e->args, $e->severity);
     }
+  }
+
+  /**
+   *
+   */
+  public function checkRequirements(){
+    $service = $this->getAccount()->getService();
+
+    if(!$service->remoteDependenciesAreUsed()){
+      return true;
+    }
+
+    if($this->checkDataExists()){
+      //check required is handled
+      foreach ($this->needed_types as $type) {
+        $sched=db_select('rules_scheduler','rs')
+                ->fields('rs',array('date'))
+                ->condition('rs.identifier','fluxtrello_'.$type.'%','LIKE')
+                ->execute()
+                ->fetch();
+        if(!$sched){
+          watchdog('fluxtrello', "Missing taskhandler for ".$type."  (@".$this->getEntityType().")");
+          return false;
+        }else{
+          //check is handled before
+        $res=db_select('rules_scheduler','rs')
+            ->fields('rs',array('tid'))
+            ->condition('rs.date',$sched->date,'>')
+            ->condition('rs.identifier','fluxtrello_'.$this->getEntityType().'%','LIKE')
+            ->execute()
+            ->fetch();
+        if(!$res){
+          watchdog('fluxtrello', "Notice: Wrong taskhandler order, will be changed now (@".$this->getEntityType().")");
+          return false;
+        }
+        }
+      }
+      return true;
+    }
+    return false;
+  }
+
+ /**
+  * 
+  */
+  public function checkDataExists(){
+    foreach ($this->needed_types as $type) {
+      $res=db_select('fluxtrello','fm')
+          ->fields('fm')
+          ->condition('fm.remote_type','fluxtrello_'.$type)
+          ->execute();
+
+      if($res->rowCount()<=0){
+        watchdog('fluxtrello', "Missing database entries for ".$type." (@".$this->getEntityType().")");
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * 
+   */
+  public function afterTaskComplete(){
+    $service = $this->getAccount()->getService();
+
+    $data=$this->getScheduleData();
+
+    if($data){
+      db_update('rules_scheduler')
+        ->condition('tid', $this->task['tid'])
+        ->fields(array('date' => $data->date + 1 + $service->getPollingInterval()))
+        ->execute();
+    }
+    else{
+      db_update('rules_scheduler')
+        ->condition('tid', $this->task['tid'])
+        ->fields(array('date' => $this->task['date'] + $service->getPollingInterval()))
+        ->execute();
+    }
+  }
+
+ /**
+  * 
+  */
+  public function getScheduleData(){
+    $or=db_or();
+
+    foreach ($this->needed_types as $type) {
+      $or->condition('rs.identifier','fluxtrello_'.$type.'%','LIKE');
+    }
+
+    $data=db_select('rules_scheduler','rs')
+            ->fields('rs',array('date'))
+            ->condition($or)
+            ->orderBy('rs.date','DESC')
+            ->execute()
+            ->fetch();
+
+    return $data;
   }
 
 /**
@@ -125,11 +216,55 @@ class TrelloTaskHandlerBase extends RepetitiveTaskHandlerBase {
   public function checkAndInvoke(){
     $account = $this->getAccount();
 
+    $data_sets=$this->getRemoteDatasets();
+
+    if(!empty($data_sets)){
+      //arrays to store the entities which invoke events (something happend)
+      $create=array();
+      $update=array();
+      $update_local_ids=array();
+      $delete=array();
+      $delete_local_ids=array();
+
+      $last_check=db_select('fluxtrello','fm')
+                    ->fields('fm',array('touched_last'))
+                    ->condition('fm.remote_type','fluxtrello_'.$this->task['entity_type'],'=')
+                    ->orderBy('fm.touched_last','DESC')
+                    ->execute()
+                    ->fetch();
     
-      /*
-      $this->invokeEvent('fluxtrello_'.$type, $create, $account, 'create');
-      $this->invokeEvent('fluxtrello_'.$type, $update, $account, 'update', $update_local_ids);
-      $this->invokeEvent('fluxtrello_'.$type, $delete, $account, 'delete', $delete_local_ids); */  
+      if($last_check){
+        $last_check=$last_check->touched_last;
+      }
+      else{
+        $last_check=time();
+      }
+
+      foreach ($data_sets as $data_set) {
+        $this->checkSingleResponseSet($data_set,$create,$update,$update_local_ids);
+      }
+
+      //get deleted id's
+      $res=db_select('fluxtrello','fm')
+              ->fields('fm',array('id','trello_id','touched_last'))
+              ->condition('fm.touched_last',$last_check,'<=')
+              ->condition('fm.remote_type','fluxtrello_'.$this->task['entity_type'],'=')
+              ->execute();
+
+      foreach($res as $data){
+        //print_r('delete local: '.$data->touched_last.'<br>');
+        array_push($delete_local_ids, $data->id);
+        array_push($delete, array('id'=>$data->trello_id));
+        db_delete('fluxtrello')
+          ->condition('id',$data->id, '=')
+          ->condition('remote_type','fluxtrello_'.$this->task['entity_type'],'=')
+          ->execute();
+      }
+
+      $this->invokeEvent('fluxtrello_'.$this->task['entity_type'], $create, $account, 'create');
+      $this->invokeEvent('fluxtrello_'.$this->task['entity_type'], $update, $account, 'update', $update_local_ids);
+      $this->invokeEvent('fluxtrello_'.$this->task['entity_type'], $delete, $account, 'delete', $delete_local_ids);
+    }     
   }
 
 /**
@@ -137,15 +272,18 @@ class TrelloTaskHandlerBase extends RepetitiveTaskHandlerBase {
  */
   private function checkSingleResponseSet($data_set, &$create, &$update, &$update_local_ids){
     $res=db_select('fluxtrello','fm')
-          ->fields('fm',array('updated_at','id'))
+          ->fields('fm',array('checksum','id'))
           ->condition('trello_id',$data_set['id'])
           ->execute()
           ->fetchAssoc();
 
+    $checksum=md5(json_encode($data_set));
+    $data_set['checksum']=$checksum;
 
     if($res){
       //check for updates
-      if($res['updated_at']<strtotime($data_set['updated-at'])){
+
+      if($res['checksum']!=$checksum){
         array_push($update, $data_set);
         array_push($update_local_ids, $res['id']);
       }
@@ -160,13 +298,42 @@ class TrelloTaskHandlerBase extends RepetitiveTaskHandlerBase {
     }
   }
 
+  protected function init(){
+    $board_ids=array();
+    $client = $this->getAccount()->client();
+
+    try{
+      $board_ids = $client->getMemberBoards(array( 'username'=>$client->getConfig('username'),
+                                                    'key'=>$client->getConfig('consumer_key'),
+                                                    'token'=>$client->getConfig('token'),
+                                                    'fields'=>''));
+    }
+    catch(BadResponseException $e){
+      if($e->getResponse()->getStatusCode()==404){
+        watchdog('Fluxtrello','[404] Host "'.$client->getBaseUrl().'" not found ('.$operation.')');
+      }
+      else{ 
+          watchdog('fluxtrello @ getMemberBoards', $e->getResponse()->getMessage());
+      }
+    }
+
+
+    return $board_ids;
+  }
+
   /**
    * 
    */
-
   protected function processQueue(){
     $queue=new TrelloTaskQueue($this->getEntityType(),$this->getAccount());
 
     $queue->process();
   }
+
+  /**
+   * @brief Get trello datasets
+   * @details Gets all trello entries needed to handle this datatype
+   * @return array (entry id => array (property name => value))
+   */
+  abstract protected function getRemoteDatasets();
 }
