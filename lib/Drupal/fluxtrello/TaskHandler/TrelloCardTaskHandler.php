@@ -32,10 +32,18 @@ class TrelloCardTaskHandler extends TrelloTaskHandlerBase {
 		$client=$this->getAccount()->client();
 
 		try{
-			foreach ($board_ids as $board_id) {
-			    $cards=array_merge($cards, $client->getBoardCards(array( 	'remote_id'=>$board_id['id'],
-		                                                          	     	'key'=>$client->getConfig('consumer_key'),
-		                                                               		'token'=>$client->getConfig('token'))));
+			foreach ($board_ids as $board) {
+			    $board_cards=$client->getBoardCards(array( 	'remote_id'=>$board['id'],
+                                                  	     	'key'=>$client->getConfig('consumer_key'),
+                                                       		'token'=>$client->getConfig('token'),
+                                                       		'fields'=>''));
+				//array_merge($cards, 
+				foreach ($board_cards as $card) {
+					array_push($cards, $client->getCard(array('remote_id'=>$card['id'],
+                                              	     	'key'=>$client->getConfig('consumer_key'),
+                                                   		'token'=>$client->getConfig('token'),
+                                                   		'fields'=>'all')));
+				}
 		    }
 	    }
 	    catch(BadResponseException $e){

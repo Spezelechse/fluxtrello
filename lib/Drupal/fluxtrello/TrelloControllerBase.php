@@ -99,7 +99,7 @@ abstract class TrelloControllerBase extends RemoteEntityController {
       $properties=$remote_entity->getEntityPropertyInfo("","");
 
       foreach ($properties as $key => $value) {
-        if($key=='id'||$key=='trello_id'){
+        if($key=='id'||$key=='trello_id'||$key=='descData'){
           continue;
         }
 
@@ -107,17 +107,27 @@ abstract class TrelloControllerBase extends RemoteEntityController {
           $value=$remote_entity->$key;
 
           if(gettype($value)=='array'){
-            $value=implode(',', $value);
+            foreach ($value as $inKey => $inValue) {
+              if(gettype($inValue)=='boolean'){
+                $req[$key.'/'.$inKey]=$inValue ? 'true' : 'false';
+              }
+              else{
+                $req[$key.'/'.$inKey]=''.$inValue;
+              }
+            }
           }
           else if(gettype($value)=='boolean'){
-            $value = $value ? 'true' : 'false';
+            $req[$key] = $value ? 'true' : 'false';
           }
-
-          $req[$key] = $value;
+          else{
+            $req[$key] = ''.$value;
+          }
         }
       }
-
-      $req['remote_id']=$remote_entity->trello_id;
+    
+      if(isset($remote_entity->trello_id)){
+        $req['remote_id']=$remote_entity->trello_id;
+      }
     }
     else if(isset($remote_id)){
       $req['remote_id']=$remote_id;
@@ -128,7 +138,7 @@ abstract class TrelloControllerBase extends RemoteEntityController {
 
     $req['key']=$client->getConfig('consumer_key');
     $req['token']=$client->getConfig('token');
-    dpm($req);
+
     return $req;
   }
 
@@ -189,6 +199,7 @@ abstract class TrelloControllerBase extends RemoteEntityController {
     $client=$account->client();
 
     $req=$this->createRequest($client, $remote_entity);
+    unset($req['idBoard']);
 
     //extract mite type
     $type=$remote_entity->entityType();
@@ -221,16 +232,21 @@ abstract class TrelloControllerBase extends RemoteEntityController {
     }
 
     //check if successful
-    if(isset($response['status'])&&$response['status']==200){
+    if(isset($response)){
       //get the new updated-at timestamp
       $operation='get'.ucfirst($type);
-      $response=$client->$operation(array(  'card_id'=>$remote_entity->trello_id,
+      $response=$client->$operation(array(  'remote_id'=>$remote_entity->trello_id,
                                             'key'=>$client->getConfig('consumer_key'),
                                             'token'=>$client->getConfig('token'),
                                             'fields'=>'all'));
 
-      $response['checksum']=md5(json_encode($response));
+      unset($response['dateLastActivity']);
+      unset($response['dateLastView']);
 
+      $response['checksum']=md5(json_encode($response));
+      echo "<br>";
+      print_r(json_encode($response));
+      echo "<br>";
       $remoteEntity = fluxservice_entify($response, $remote_entity->entityType(), $account);
 
       //update local database entry

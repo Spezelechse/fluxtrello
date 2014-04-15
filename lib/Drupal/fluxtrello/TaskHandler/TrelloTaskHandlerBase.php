@@ -241,7 +241,9 @@ abstract class TrelloTaskHandlerBase extends RepetitiveTaskHandlerBase {
       }
 
       foreach ($data_sets as $data_set) {
-        $this->checkSingleResponseSet($data_set,$create,$update,$update_local_ids);
+        if($data_set['name']!="Selbstentwicklungsraum"){
+          $this->checkSingleResponseSet($data_set,$create,$update,$update_local_ids);
+        }
       }
 
       //get deleted id's
@@ -276,6 +278,9 @@ abstract class TrelloTaskHandlerBase extends RepetitiveTaskHandlerBase {
           ->condition('trello_id',$data_set['id'])
           ->execute()
           ->fetchAssoc();
+
+    unset($data_set['dateLastActivity']);
+    unset($data_set['dateLastView']);
 
     $checksum=md5(json_encode($data_set));
     $data_set['checksum']=$checksum;

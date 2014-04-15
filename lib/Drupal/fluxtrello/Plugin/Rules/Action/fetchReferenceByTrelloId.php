@@ -62,7 +62,7 @@ class fetchReferenceByTrelloId extends RulesPluginHandlerBase implements \RulesA
           ->condition('fm.type',$local_type,'=')
           ->execute()
           ->fetchAssoc();
-
+    
     if($res){
       $reference=entity_load_single($res['type'], $res['id']);  
     }
