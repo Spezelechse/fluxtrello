@@ -29,7 +29,7 @@ class deleteRemoteEntity extends RulesPluginHandlerBase implements \RulesActionH
           'type' => 'entity',
           'label' => t('Local: Entity'),
           'required' => TRUE,
-          'wrapped' => FALSE,
+          'wrapped' => TRUE,
         ),
       ),
     );
@@ -48,8 +48,8 @@ class deleteRemoteEntity extends RulesPluginHandlerBase implements \RulesActionH
       $isNode=0;
     }
     else{
-      $local_type=$local_entity->type;
-      $local_id=$local_entity->nid;
+      $local_type=$local_entity->type();
+      $local_id=$local_entity->getIdentifier();
     }
 
     $res=db_select('fluxtrello','fm')

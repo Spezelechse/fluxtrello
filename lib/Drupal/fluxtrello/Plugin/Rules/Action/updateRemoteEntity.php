@@ -34,7 +34,7 @@ class updateRemoteEntity extends RulesPluginHandlerBase implements \RulesActionH
         'local_entity' => array(
           'type' => 'entity',
           'label' => t('Local: Entity'),
-          'wrapped' => FALSE,
+          'wrapped' => TRUE,
           'required' => TRUE,
         ),
       ),
@@ -62,8 +62,8 @@ class updateRemoteEntity extends RulesPluginHandlerBase implements \RulesActionH
       $isNode=0;
     }
     else{
-      $local_type=$local_entity->type;
-      $local_id=$local_entity->nid;
+      $local_type=$local_entity->type();
+      $local_id=$local_entity->getIdentifier();
     }
 
     $controller = entity_get_controller($remote_entity->entityType());
