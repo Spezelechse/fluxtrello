@@ -47,6 +47,7 @@ class createLocalEntity extends RulesPluginHandlerBase implements \RulesActionHa
   public function execute(TrelloAccountInterface $account, $remote_entity, $local_entity) {
     print_r('create local<br>');
     dpm('create local');
+    
     $local_type="";
     $local_id=0;
     $isNode=1;

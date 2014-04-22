@@ -50,8 +50,8 @@ class createRemoteEntity extends RulesPluginHandlerBase implements \RulesActionH
    * Executes the action.
    */
   public function execute(TrelloAccountInterface $account, $remote_entity, $local_entity) {
-    dpm('create remote');
-    print_r('create remote');
+    dpm('create remote trello');
+    print_r('create remote trello<br>');
     
     $local_type="";
     $local_id=0;

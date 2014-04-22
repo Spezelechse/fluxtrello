@@ -30,6 +30,15 @@ abstract class TrelloControllerBase extends RemoteEntityController {
                   time(),
                   $remote_entity->checksum);
 
+    array_push($fields, 'board_id');
+
+    if(isset($remote_entity->idBoard)){
+      array_push($values, $remote_entity->idBoard);
+    }
+    else{
+      array_push($values, $remote_entity->trello_id);
+    }
+
     $nid=db_insert('fluxtrello')
       ->fields($fields)
       ->values($values)
@@ -244,9 +253,7 @@ abstract class TrelloControllerBase extends RemoteEntityController {
       unset($response['dateLastView']);
 
       $response['checksum']=md5(json_encode($response));
-      echo "<br>";
-      print_r(json_encode($response));
-      echo "<br>";
+
       $remoteEntity = fluxservice_entify($response, $remote_entity->entityType(), $account);
 
       //update local database entry

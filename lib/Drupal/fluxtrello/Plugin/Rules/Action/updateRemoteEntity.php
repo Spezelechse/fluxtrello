@@ -50,8 +50,8 @@ class updateRemoteEntity extends RulesPluginHandlerBase implements \RulesActionH
    * Executes the action.
    */
   public function execute(TrelloAccountInterface $account, $remote_entity, $local_entity) {
-    dpm('update remote');
-    print_r('update remote');
+    dpm('update remote trello');
+    print_r('update remote trello<br>');
 
     $local_type="";
     $local_id=0;

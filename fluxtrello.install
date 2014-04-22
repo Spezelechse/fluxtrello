@@ -47,7 +47,7 @@
           'length' => '255',
           ),
         ),
-      'primary key' => array('id','type'),
+      'primary key' => array('id','remote_id'),
       );
     $schema['fluxtrello_queue'] = array(
       'description' => 'Trello queue: if trello is unavailable the operations are stored here for later execution',
