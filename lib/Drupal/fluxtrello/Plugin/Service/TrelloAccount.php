@@ -130,7 +130,7 @@ class TrelloAccount extends OAuthAccountBase implements TrelloAccountInterface {
   protected function getAuthorizeUrl() {
     $siteName=check_plain(variable_get('site_name'));
 
-    return "https://trello.com/1/OAuthAuthorizeToken?name=".$siteName."&expiration=never&scope=read,write";
+    return "https://trello.com/1/OAuthAuthorizeToken?name=".$siteName."&expiration=never&scope=read,write,account";
   }
 
   /**

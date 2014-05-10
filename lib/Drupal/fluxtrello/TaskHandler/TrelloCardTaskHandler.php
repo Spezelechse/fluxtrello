@@ -26,14 +26,19 @@ class TrelloCardTaskHandler extends TrelloTaskHandlerBase {
 	}
 
 	protected function getRemoteDatasets(){
-		$board_ids=$this->init();
+		$board_ids=db_select('fluxtrello','ft')
+						->fields('ft',array('trello_id'))
+						->condition('ft.remote_type','fluxtrello_board','=')
+						->execute()
+						->fetchAll();
+
 		$cards=array();
 
 		$client=$this->getAccount()->client();
 
 		try{
 			foreach ($board_ids as $board) {
-			    $board_cards=$client->getBoardCards(array( 	'remote_id'=>$board['id'],
+			    $board_cards=$client->getBoardCards(array( 	'remote_id'=>$board->trello_id,
                                                   	     	'key'=>$client->getConfig('consumer_key'),
                                                        		'token'=>$client->getConfig('token'),
                                                        		'fields'=>''));

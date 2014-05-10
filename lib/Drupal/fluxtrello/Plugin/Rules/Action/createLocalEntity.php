@@ -59,6 +59,10 @@ class createLocalEntity extends RulesPluginHandlerBase implements \RulesActionHa
     else{
       $local_type=$local_entity->type();
       $local_id=$local_entity->getIdentifier();
+
+      if(empty($local_id)){
+        $local_id=$local_entity->nid->value();
+      }
     }
 
     $controller = entity_get_controller($remote_entity->entityType());

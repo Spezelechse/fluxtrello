@@ -3,6 +3,25 @@
   "apiVersion": "1.0",
   "description": "Mite API",
   "operations": {
+    "GetMyEmail": {
+      "httpMethod": "GET",
+      "uri": "members/me/email",
+      "summary": "Returns account email address.",
+      "parameters": {
+        "key": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "api key for app authorization"
+        },
+        "token": {
+          "location": "query",
+          "type": "string",
+          "required": true,
+          "description": "token for user authorization"
+        }
+      }
+    },
     "GetMemberBoards": {
       "httpMethod": "GET",
       "uri": "members/{username}/boards",
