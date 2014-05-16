@@ -24,7 +24,7 @@ class createRemoteLists extends RulesPluginHandlerBase implements \RulesActionHa
       'name' => 'fluxtrello_create_remote_lists',
       'label' => t('Create remote lists'),
       'parameter' => array(
-        'account' => static::getServiceParameterInfo(),
+        'account' => static::getServiceParameterInfo('fluxtrello'),
         'board_id' => array(
           'type' => 'text',
           'label' => t('Trello: board id'),

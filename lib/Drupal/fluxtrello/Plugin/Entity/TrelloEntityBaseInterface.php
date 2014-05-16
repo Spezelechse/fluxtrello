@@ -7,11 +7,11 @@
 
 namespace Drupal\fluxtrello\Plugin\Entity;
 
-use Drupal\fluxservice\Entity\RemoteEntityInterface;
+use Drupal\fluxservice_extension\Plugin\Entity\RemoteEntityExtendedInterface;
 
 /**
  * Interfaces for Trello Entity Base.
  */
-interface TrelloEntityBaseInterface extends RemoteEntityInterface {
+interface TrelloEntityBaseInterface extends RemoteEntityExtendedInterface {
 
 }

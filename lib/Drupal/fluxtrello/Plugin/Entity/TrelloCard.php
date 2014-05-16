@@ -44,18 +44,6 @@ class TrelloCard extends TrelloEntityBase implements TrelloCardInterface {
   public static function getEntityPropertyInfo($entity_type, $entity_info) {
     $info=parent::getEntityPropertyInfo($entity_type,$entity_info);
 
-    $info['id'] = array(
-      'label' => t('Id'),
-      'description' => t("Card id."),
-      'type' => 'text',
-      'setter callback' => 'entity_property_verbatim_set',
-    );
-    $info['trello_id'] = array(
-      'label' => t('Trello id'),
-      'description' => t("Trello id."),
-      'type' => 'text',
-      'setter callback' => 'entity_property_verbatim_set',
-    );
     $info['badges'] = array(
       'label' => t('Badges'),
       'description' => t("Badges."),

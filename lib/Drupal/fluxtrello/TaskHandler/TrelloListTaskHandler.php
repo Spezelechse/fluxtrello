@@ -23,16 +23,21 @@ class TrelloListTaskHandler extends TrelloTaskHandlerBase {
 		}
     	$this->afterTaskComplete();
 	}
-
+	
 	protected function getRemoteDatasets(){
-		$board_ids=$this->init();
+		$board_ids=db_select('fluxtrello','ft')
+						->fields('ft',array('trello_id'))
+						->condition('ft.remote_type','fluxtrello_board','=')
+						->execute()
+						->fetchAll();
+
 		$lists=array();
 
 		$client=$this->getAccount()->client();
 
 		try{
-			foreach ($board_ids as $board_id) {
-			    $lists = array_merge($lists, $client->getBoardLists(array( 	'remote_id'=>$board_id['id'],
+			foreach ($board_ids as $board) {
+			    $lists = array_merge($lists, $client->getBoardLists(array( 	'remote_id'=>$board->trello_id,
 						                                           		    'key'=>$client->getConfig('consumer_key'),
 						                                               		'token'=>$client->getConfig('token'))));
 		    }

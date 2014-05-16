@@ -7,19 +7,24 @@
 
 namespace Drupal\fluxtrello\Plugin\Entity;
 
-use Drupal\fluxservice\Entity\RemoteEntity;
+use Drupal\fluxservice_extension\Plugin\Entity\RemoteEntityExtended;
 
 /**
  * Entity base class.
  */
-class TrelloEntityBase extends RemoteEntity implements TrelloEntityBaseInterface {
+class TrelloEntityBase extends RemoteEntityExtended implements TrelloEntityBaseInterface {
 	public function __construct(array $values = array(), $entity_type = NULL) {
+		unset($values['dateLastActivity']);
+      	unset($values['dateLastView']);
+
 		parent::__construct($values, $entity_type);
 
-		if(isset($values['id'])){
-	   		$id=explode(':', $values['id']);
-	   		$this->trello_id=$id[2];
-   		}
+   		$id=explode(':', $values['id']);
+   		$this->trello_id=$id[2];
+
+   		$values['id']=$id[2];
+
+	    $values['checksum']=md5(json_encode($values));
    	}
 
 	/**
@@ -32,7 +37,23 @@ class TrelloEntityBase extends RemoteEntity implements TrelloEntityBaseInterface
 	      'type' => 'text',
 	      'setter callback' => 'entity_property_verbatim_set',
 	    );
+	    $info['id'] = array(
+	      'label' => t('Id'),
+	      'description' => t("Entity id."),
+	      'type' => 'text',
+	      'setter callback' => 'entity_property_verbatim_set',
+	    );
+	    $info['remote_id'] = array(
+	      'label' => t('Trello id'),
+	      'description' => t("Trello id."),
+	      'type' => 'text',
+	      'setter callback' => 'entity_property_verbatim_set',
+	    );
 
 	    return $info;
+   	}
+
+   	public function getCheckValue(){
+   		return $this->checksum;
    	}
 }

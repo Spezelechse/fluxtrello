@@ -42,18 +42,8 @@ class TrelloBoard extends TrelloEntityBase implements TrelloBoardInterface {
    * Gets the entity property definitions.
    */
   public static function getEntityPropertyInfo($entity_type, $entity_info) {
-    $info['id'] = array(
-      'label' => t('Id'),
-      'description' => t("Board id."),
-      'type' => 'text',
-      'setter callback' => 'entity_property_verbatim_set',
-    );
-    $info['trello_id'] = array(
-      'label' => t('Trello id'),
-      'description' => t("Trello id."),
-      'type' => 'text',
-      'setter callback' => 'entity_property_verbatim_set',
-    );
+    $info=parent::getEntityPropertyInfo($entity_type,$entity_info);
+
     $info['name'] = array(
       'label' => t('Name'),
       'description' => t("Board name."),

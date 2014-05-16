@@ -24,7 +24,7 @@ class getAccountEmail extends RulesPluginHandlerBase implements \RulesActionHand
       'name' => 'fluxtrello_get_account_email',
       'label' => t('Get account email'),
       'parameter' => array(
-        'account' => static::getServiceParameterInfo()
+        'account' => static::getServiceParameterInfo('fluxtrello')
       ),
       'provides' => array(
         'email' => array(
