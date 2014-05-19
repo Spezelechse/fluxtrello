@@ -19,23 +19,11 @@ class TrelloBoardEventHandler extends TrelloEventHandlerBase {
     return static::getInfoDefaults() + array(
       'name' => 'fluxtrello_board_event',
       'label' => t('Something happend to a board'),
-      'variables' => array(
-        'account' => static::getServiceVariableInfo(),
+      'variables' => static::getServiceVariableInfo()+array(
         'trello_board' => array(
           'type' => 'fluxtrello_board',
           'label' => t('Trello: Board'),
           'description' => t('The board that triggered the event.'),
-        ),
-        'change_type' => array(
-          'type' => 'text',
-          'options list' => 'fluxtrello_change_type_get_options',
-          'label' => t('Change type'),
-          'restiction' => 'input',
-        ),
-        'local_entity_id' => array(
-          'type' => 'integer',
-          'label' => t('Local entity id'),
-          'optional' => TRUE,
         ),
       ),
     );

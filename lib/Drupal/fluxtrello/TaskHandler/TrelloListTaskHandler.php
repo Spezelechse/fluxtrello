@@ -26,7 +26,7 @@ class TrelloListTaskHandler extends TrelloTaskHandlerBase {
 	
 	protected function getRemoteDatasets(){
 		$board_ids=db_select('fluxtrello','ft')
-						->fields('ft',array('trello_id'))
+						->fields('ft',array('remote_id'))
 						->condition('ft.remote_type','fluxtrello_board','=')
 						->execute()
 						->fetchAll();
@@ -37,7 +37,7 @@ class TrelloListTaskHandler extends TrelloTaskHandlerBase {
 
 		try{
 			foreach ($board_ids as $board) {
-			    $lists = array_merge($lists, $client->getBoardLists(array( 	'remote_id'=>$board->trello_id,
+			    $lists = array_merge($lists, $client->getBoardLists(array( 	'remote_id'=>$board->remote_id,
 						                                           		    'key'=>$client->getConfig('consumer_key'),
 						                                               		'token'=>$client->getConfig('token'))));
 		    }

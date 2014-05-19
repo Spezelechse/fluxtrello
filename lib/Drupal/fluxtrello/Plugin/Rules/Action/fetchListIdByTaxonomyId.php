@@ -51,7 +51,7 @@ class fetchListIdByTaxonomyId extends RulesPluginHandlerBase implements \RulesAc
     print_r("<br>fetch list id: ".$taxonomy_id."<br>");
 
     $res=db_select('fluxtrello','fm')
-          ->fields('fm',array('trello_id'))
+          ->fields('fm',array('remote_id'))
           ->condition('fm.id',$taxonomy_id,'=')
           ->condition('fm.board_id', $board_id, '=')
           ->condition('fm.type','taxonomy_term','=')
@@ -59,7 +59,7 @@ class fetchListIdByTaxonomyId extends RulesPluginHandlerBase implements \RulesAc
           ->fetchAssoc();
     
     if($res){
-      $id=$res['trello_id'];  
+      $id=$res['remote_id'];  
     }
     else{
       $id=0;

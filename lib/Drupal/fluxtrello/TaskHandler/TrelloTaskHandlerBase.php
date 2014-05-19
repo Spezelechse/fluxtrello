@@ -23,9 +23,10 @@ abstract class TrelloTaskHandlerBase extends RepetitiveTaskHandlerBaseExtended {
     $client = $this->getAccount()->client();
 
     try{
-      $board_ids = $client->getMemberBoards(array( 'username'=>$client->getConfig('username'),
+      $board_ids = $client->getMemberBoards(array(  'username'=>$client->getConfig('username'),
                                                     'key'=>$client->getConfig('consumer_key'),
                                                     'token'=>$client->getConfig('token'),
+                                                    'filter'=>'open',
                                                     'fields'=>''));
     }
     catch(BadResponseException $e){
@@ -45,6 +46,9 @@ abstract class TrelloTaskHandlerBase extends RepetitiveTaskHandlerBaseExtended {
  * 
  */
   protected function getCheckvalue($data_set){
+    unset($data_set['dateLastActivity']);
+    unset($data_set['dateLastView']);
+
     return md5(json_encode($data_set));
   }
 }

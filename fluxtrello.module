@@ -1,5 +1,4 @@
 <?php
-//use Drupal\fluxmite\MiteQueuedTasks;
 /**
  * @file
  * Main module file.
@@ -22,26 +21,4 @@ function fluxtrello_rules_category_info() {
  */
 function fluxtrello_fluxservice_plugin_directory() {
 	return 'lib/Drupal/fluxtrello/Plugin';
-}
-
-
-/**
- * 
- */
-function fluxtrello_task_type_get_options(){
-	return TrelloQueuedTasks::getOptions();
-}
-
-/**
- * 
- */
-function fluxtrello_task_priority_get_options(){
-	return array(0,1,2,3,5);
-}
-
-/**
- * 
- */
-function fluxtrello_change_type_get_options(){
-	return array('create'=>'create','delete'=>'delete','update'=>'update');
 }
