@@ -23,8 +23,7 @@ class getAccountEmail extends RulesPluginHandlerBase implements \RulesActionHand
     return static::getInfoDefaults() + array(
       'name' => 'fluxtrello_get_account_email',
       'label' => t('Get account email'),
-      'parameter' => array(
-        'account' => static::getServiceParameterInfo('fluxtrello')
+      'parameter' => static::getServiceParameterInfo('fluxtrello')+array(
       ),
       'provides' => array(
         'email' => array(
@@ -38,8 +37,8 @@ class getAccountEmail extends RulesPluginHandlerBase implements \RulesActionHand
    * Executes the action.
    */
   public function execute(TrelloAccountInterface $account) {
-    dpm('get account email');
-    print_r('get account email<br>');
+//    dpm('get account email');
+  //  print_r('get account email<br>');
 
     $controller = entity_get_controller('fluxtrello_list');
     $client = $account->client();

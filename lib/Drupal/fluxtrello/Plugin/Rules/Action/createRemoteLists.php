@@ -23,8 +23,7 @@ class createRemoteLists extends RulesPluginHandlerBase implements \RulesActionHa
     return static::getInfoDefaults() + array(
       'name' => 'fluxtrello_create_remote_lists',
       'label' => t('Create remote lists'),
-      'parameter' => array(
-        'account' => static::getServiceParameterInfo('fluxtrello'),
+      'parameter' => static::getServiceParameterInfo('fluxtrello')+array(
         'board_id' => array(
           'type' => 'text',
           'label' => t('Trello: board id'),
@@ -49,13 +48,11 @@ class createRemoteLists extends RulesPluginHandlerBase implements \RulesActionHa
    * Executes the action.
    */
   public function execute(TrelloAccountInterface $account, $board_id, $local_entity, $vocab_list) {
-    dpm('create remote lists');
-    print_r('create remote lists<br>');
+//    dpm('create remote lists');
+  //  print_r('create remote lists<br>');
 
     $controller = entity_get_controller('fluxtrello_list');
     $client = $account->client();
-    
-    //$created = $controller->createRemote($local_id, $local_type, $isNode, $account, $remote_entity);
 
     $lists=$client->getBoardLists(array(  'remote_id'=>$board_id,
                                           'key'=>$client->getConfig('consumer_key'),
@@ -74,12 +71,12 @@ class createRemoteLists extends RulesPluginHandlerBase implements \RulesActionHa
       if(isset($list)){
         $controller->createLocal($list, $vocab->getIdentifier(), $vocab->type(),1);
         $list->name=$vocab->name->value();
-        $controller->updateRemote($vocab->getIdentifier(), $vocab->type(), 1, $account, $list);
+        $controller->updateRemote($vocab->getIdentifier(), $vocab->type(), $account, $list);
       }
       else{
         $list=entity_create('fluxtrello_list',array('name'=>$vocab->name->value(),
                                                     'idBoard'=>$board_id));
-        $controller->createRemote($vocab->getIdentifier(), $vocab->type(), 1, $account, $list);
+        $controller->createRemote($vocab->getIdentifier(), $vocab->type(), $account, $list);
       }
     } 
   }

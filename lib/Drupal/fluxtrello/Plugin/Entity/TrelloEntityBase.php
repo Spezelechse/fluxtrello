@@ -19,11 +19,13 @@ class TrelloEntityBase extends RemoteEntityExtended implements TrelloEntityBaseI
 
 		parent::__construct($values, $entity_type);
 
-   		$id=explode(':', $values['id']);
-   		$this->remote_id=$id[2];
+		if(isset($values['id'])){
+	   		$id=explode(':', $values['id']);
+	   		$this->remote_id=$id[2];
 
-   		$values['id']=$id[2];
-
+	   		$values['id']=$id[2];
+   		}
+   		
 	    $this->checksum=md5(json_encode($values));
    	}
 

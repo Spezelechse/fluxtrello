@@ -47,8 +47,8 @@ class fetchListIdByTaxonomyId extends RulesPluginHandlerBase implements \RulesAc
    * Executes the action.
    */
   public function execute($taxonomy_id, $board_id) {
-    dpm("fetch list id: ".$taxonomy_id);
-    print_r("<br>fetch list id: ".$taxonomy_id."<br>");
+//    dpm("fetch list id: ".$taxonomy_id);
+  //  print_r("<br>fetch list id: ".$taxonomy_id."<br>");
 
     $res=db_select('fluxtrello','fm')
           ->fields('fm',array('remote_id'))
