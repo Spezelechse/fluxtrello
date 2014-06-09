@@ -16,7 +16,7 @@ class TrelloListTaskHandler extends TrelloTaskHandlerBase {
    * {@inheritdoc}
    */
 	public function runTask() {
-	  	if($this->checkRequirements()){
+	  	if($this->checkDependencies()){
 		  	print_r("<br>list<br>");
 		  	$this->processQueue();
 		    $this->checkAndInvoke();

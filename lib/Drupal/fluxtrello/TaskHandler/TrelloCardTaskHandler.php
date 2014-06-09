@@ -17,7 +17,7 @@ class TrelloCardTaskHandler extends TrelloTaskHandlerBase {
    * {@inheritdoc}
    */
 	public function runTask() {
-	    if($this->checkRequirements()){
+	    if($this->checkDependencies()){
 		  	print_r("<br>card<br>");
 		  	$this->processQueue();
 		    $this->checkAndInvoke();
