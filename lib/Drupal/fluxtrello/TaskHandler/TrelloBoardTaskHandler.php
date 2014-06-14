@@ -16,7 +16,6 @@ class TrelloBoardTaskHandler extends TrelloTaskHandlerBase {
    */
 	public function runTask() {
 	  	print_r("<br>board<br>");
-	  	$this->processQueue();
 	    $this->checkAndInvoke();
 	}
 

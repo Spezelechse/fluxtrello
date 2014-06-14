@@ -117,16 +117,6 @@ class TrelloAccount extends OAuthAccountBase implements TrelloAccountInterface {
   /**
    * {@inheritdoc}
    */
-  protected function processAuthorizedAccount(array $response) {
-    parent::processAuthorizedAccount($response);
-    // Build the label and remote id from the response data.
-    $this->setRemoteIdentifier($response['user_id'])->setLabel($response['screen_name']);
-  }
-
-
-  /**
-   * {@inheritdoc}
-   */
   protected function getAuthorizeUrl() {
     $siteName=check_plain(variable_get('site_name'));
 

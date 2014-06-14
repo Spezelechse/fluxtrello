@@ -18,10 +18,9 @@ class TrelloListTaskHandler extends TrelloTaskHandlerBase {
 	public function runTask() {
 	  	if($this->checkDependencies()){
 		  	print_r("<br>list<br>");
-		  	$this->processQueue();
 		    $this->checkAndInvoke();
 		}
-    	$this->afterTaskComplete();
+    	$this->adjustExecutionOrder();
 	}
 	
 	protected function getRemoteDatasets(){

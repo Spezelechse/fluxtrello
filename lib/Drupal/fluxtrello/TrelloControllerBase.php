@@ -8,6 +8,7 @@
 namespace Drupal\fluxtrello;
 
 use Drupal\fluxservice_extension\RemoteEntityControllerExtended;
+use Drupal\fluxservice_extension\FluxserviceTaskQueue;
 use Guzzle\Http\Exception\BadResponseException;
 
 /**
@@ -85,16 +86,6 @@ abstract class TrelloControllerBase extends RemoteEntityControllerExtended {
     else{
       return true;
     }
-  }
-
-  /**
-   * 
-   */
-  public function extractRemoteType($entity_type){
-    $type_split=explode("_",$entity_type);
-    $type=$type_split[1];
-
-    return $type;
   }
 
   /**
