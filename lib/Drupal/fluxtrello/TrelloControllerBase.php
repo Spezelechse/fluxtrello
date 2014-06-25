@@ -91,6 +91,16 @@ abstract class TrelloControllerBase extends RemoteEntityControllerExtended {
   /**
    * 
    */
+  public function extractRemoteType($entity_type){
+    $type_split=explode("_",$entity_type);
+    $type=$type_split[1];
+
+    return $type;
+  }
+
+  /**
+   * 
+   */
   public function prepareResponse($response){
     return $response;
   }

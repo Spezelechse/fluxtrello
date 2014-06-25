@@ -29,12 +29,6 @@ class createRemoteLists extends RulesPluginHandlerBase implements \RulesActionHa
           'label' => t('Trello: board id'),
           'required' => TRUE,
         ),
-        'local_entity' => array(
-          'type' => 'entity',
-          'label' => t('Local: Entity'),
-          'wrapped' => TRUE,
-          'required' => TRUE,
-        ),
         'vocab_list' => array(
           'type' => 'list',
           'label' => t('Vocabulary list'),
@@ -47,7 +41,7 @@ class createRemoteLists extends RulesPluginHandlerBase implements \RulesActionHa
   /**
    * Executes the action.
    */
-  public function execute(TrelloAccountInterface $account, $board_id, $local_entity, $vocab_list) {
+  public function execute(TrelloAccountInterface $account, $board_id, $vocab_list) {
 //    dpm('create remote lists');
   //  print_r('create remote lists<br>');
 
