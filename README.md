@@ -1,10 +1,13 @@
-fluxtrello
+flux Trello
 ==========
-integrates the trello api into drupal via flux service integration
 
-still under development, part of my bachelor thesis
+flux Trello is a Drupal 7 module which integrates most of the Trello REST API into Drupal and makes it useable inside Rules. This module is based on flux Service Extension which provides the basic functionality.
 
-Another parts can be found at:
+A small guide which shows how to use this module with rules can be found [here](https://github.com/Spezelechse/fluxmite/blob/master/Fluxmite%20Rules%20Guide.pdf).
+
+This was part of my bachelor thesis
+
+The other parts can be found at:
 
 https://github.com/Spezelechse/fluxmite
 
